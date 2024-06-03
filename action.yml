@@ -1,0 +1,22 @@
+name: 'Gitleaks Action'
+description: 'A reusable GitHub Action to run Gitleaks secret scanning'
+inputs:
+  source:
+    description: 'The source directory to scan'
+    required: true
+    default: '.'
+  report_path:
+    description: 'The path to save the report'
+    required: true
+    default: 'report.json'
+  report_format:
+    description: 'The format of the report (json, sarif, etc.)'
+    required: true
+    default: 'json'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.source }}
+    - ${{ inputs.report_path }}
+    - ${{ inputs.report_format }}
